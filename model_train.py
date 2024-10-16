@@ -33,6 +33,12 @@ y = train_data['label']
 # X:画像データ y:ラベルデータをセットでdataset化
 dataset_train = tf.data.Dataset.from_tensor_slices((X, y))
 
+# データセットのサイズを取得
+dataset_size = len(dataset_train)
+
+# バリデーションセットのサイズを計算
+validation_size = int(validation_split * dataset_size)
+
 # シャッフル
 dataset_train = dataset_train.shuffle(buffer_size=len(X))
 
@@ -40,6 +46,10 @@ dataset_train = dataset_train.shuffle(buffer_size=len(X))
 #（drop_remainder = Trueで端数切り捨て）
 # バッチサイズを128で固定したいため。
 dataset_train = dataset_train.batch(32, drop_remainder=True)
+
+# 訓練セットとバリデーションセットに分割
+train_dataset = dataset_train.skip(validation_size)
+val_dataset = dataset_train.take(validation_size)
 
 # npzファイルを読み込む(test)
 test_data = np.load(test_data_path)
@@ -87,7 +97,7 @@ if model_display_flag == 1:
     model.summary()
 
 #学習(全結合層のみ)
-model.fit(dataset_train, epochs=10, validation_split=validation_split)
+model.fit(dataset_train, epochs=10, validation_data=val_dataset)
 
 #結果の表示
 accuracy = model.evaluate(dataset_test, verbose=0)
@@ -120,8 +130,7 @@ logging = callbacks.make_tensorboard(set_dir_name)
 #学習
 model.fit(dataset_train, 
           epochs=epochs, 
-          validation_split=validation_split, 
-          batch_size=batch_size,
+          validation_data=val_dataset
           callbacks = [early_stopping, reduce_lr, logging],
           verbose=1
           )
