@@ -87,7 +87,7 @@ if model_display_flag == 1:
     model.summary()
 
 #学習(全結合層のみ)
-model.fit(dataset_train, epochs=10, validation_split=validation_split, batch_size=batch_size)
+model.fit(dataset_train, epochs=10, validation_split=validation_split)
 
 #結果の表示
 accuracy = model.evaluate(dataset_test, verbose=0)
