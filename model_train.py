@@ -8,7 +8,7 @@ from tensorflow.keras.layers import Dense, GlobalAveragePooling2D
 from tensorflow.keras.optimizers import Adam, RMSprop
 
 base_model_name =InceptionV3 #転移学習元のネットワークを指定
-num_classes = 10 #クラス数
+num_classes = 5 #クラス数
 optimizer =  Adam() #最適化手法
 loss = 'categorical_crossentropy' #損失関数
 metrics = 'accuracy' #評価関数
@@ -44,8 +44,7 @@ dataset_train = dataset_train.shuffle(buffer_size=len(X))
 
 # ミニバッチ化
 #（drop_remainder = Trueで端数切り捨て）
-# バッチサイズを128で固定したいため。
-dataset_train = dataset_train.batch(32, drop_remainder=True)
+dataset_train = dataset_train.batch(batch_size, drop_remainder=True)
 
 # 訓練セットとバリデーションセットに分割
 train_dataset = dataset_train.skip(validation_size)
@@ -63,12 +62,6 @@ dataset_test = tf.data.Dataset.from_tensor_slices((X, y))
 
 # シャッフル
 dataset_test = dataset_test.shuffle(buffer_size=len(X))
-
-# ミニバッチ化
-#（drop_remainder = Trueで端数切り捨て）
-# バッチサイズを128で固定したいため。
-dataset_test = dataset_test.batch(32, drop_remainder=True)
-
 
 #転移学習元のネットワークをダウンロード
 #"include_top=False"の場合全結合層を除いたネットーワークを取得
