@@ -39,7 +39,7 @@ dataset_train = dataset_train.shuffle(buffer_size=len(X))
 # ミニバッチ化
 #（drop_remainder = Trueで端数切り捨て）
 # バッチサイズを128で固定したいため。
-dataset_train = dataset_train.batch(128, drop_remainder=True)
+dataset_train = dataset_train.batch(32, drop_remainder=True)
 
 # npzファイルを読み込む(test)
 test_data = np.load(test_data_path)
@@ -57,7 +57,7 @@ dataset_test = dataset_test.shuffle(buffer_size=len(X))
 # ミニバッチ化
 #（drop_remainder = Trueで端数切り捨て）
 # バッチサイズを128で固定したいため。
-dataset_test = dataset_test.batch(128, drop_remainder=True)
+dataset_test = dataset_test.batch(32, drop_remainder=True)
 
 
 #転移学習元のネットワークをダウンロード
