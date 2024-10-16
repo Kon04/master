@@ -36,6 +36,11 @@ dataset_train = tf.data.Dataset.from_tensor_slices((X, y))
 # シャッフル
 dataset_train = dataset_train.shuffle(buffer_size=len(X))
 
+# ミニバッチ化
+#（drop_remainder = Trueで端数切り捨て）
+# バッチサイズを128で固定したいため。
+dataset_train = dataset_train.batch(128, drop_remainder=True)
+
 # npzファイルを読み込む(test)
 test_data = np.load(test_data_path)
 
@@ -48,6 +53,12 @@ dataset_test = tf.data.Dataset.from_tensor_slices((X, y))
 
 # シャッフル
 dataset_test = dataset_test.shuffle(buffer_size=len(X))
+
+# ミニバッチ化
+#（drop_remainder = Trueで端数切り捨て）
+# バッチサイズを128で固定したいため。
+dataset_test = dataset_test.batch(128, drop_remainder=True)
+
 
 #転移学習元のネットワークをダウンロード
 #"include_top=False"の場合全結合層を除いたネットーワークを取得
