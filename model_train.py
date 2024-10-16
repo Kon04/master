@@ -130,7 +130,7 @@ logging = callbacks.make_tensorboard(set_dir_name)
 #学習
 model.fit(dataset_train, 
           epochs=epochs, 
-          validation_data=val_dataset
+          validation_data=val_dataset,
           callbacks = [early_stopping, reduce_lr, logging],
           verbose=1
           )
