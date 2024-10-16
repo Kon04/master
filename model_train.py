@@ -34,7 +34,7 @@ y = train_data['label']
 dataset_train = tf.data.Dataset.from_tensor_slices((X, y))
 
 # データセットのサイズを取得
-dataset_size = len(dataset_train)
+dataset_size = sum(1 for _ in dataset_train)
 
 # バリデーションセットのサイズを計算
 validation_size = int(validation_split * dataset_size)
