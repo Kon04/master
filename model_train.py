@@ -23,7 +23,7 @@ train_data_path = 'train_img.npz' #訓練データのパス
 test_data_path = 'test_img.npz'   #テストデータのパス
 num_test = 750 #テストデータの枚数
 
-tf.config.experimental_run_functions_eagerly(True)  # GPUのプロファイリングを無効化
+# tf.config.experimental_run_functions_eagerly(True)  # GPUのプロファイリングを無効化
 
 #---------------------------------------------------------
 #データセットの取得
