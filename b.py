@@ -32,14 +32,9 @@ dataset_size = sum(1 for _ in dataset_train)
 
 # バリデーションセットのサイズを計算
 validation_size = int(validation_split * dataset_size)
-print(validation_size)
 
 # シャッフル
 dataset_train = dataset_train.shuffle(buffer_size=len(X))
-
-# ミニバッチ化
-#（drop_remainder = Trueで端数切り捨て）
-# dataset_train = dataset_train.batch(batch_size, drop_remainder=True)
 
 # 訓練セットとバリデーションセットに分割
 dataset_train = dataset_train.skip(validation_size)
@@ -66,4 +61,9 @@ dataset_test = tf.data.Dataset.from_tensor_slices((X, y))
 # シャッフル
 dataset_test = dataset_test.shuffle(buffer_size=len(X))
 
-print(X.shape, y.shape)
+# 最初の要素を取得して形状を確認
+count = 0
+for images in dataset_test:
+    count += 1
+
+print(count)
