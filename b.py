@@ -50,6 +50,20 @@ val_dataset = dataset_train.take(validation_size)
 dataset_train = dataset_train.batch(batch_size, drop_remainder=True)
 val_dataset = val_dataset.batch(batch_size, drop_remainder=True)
 
-# データセットのサイズを確認
-print(f"Training batches: {dataset_train.cardinality().numpy()}")
-print(f"Validation batches: {val_dataset.cardinality().numpy()}")
+# npzファイルを読み込む(test)
+test_data = np.load(test_data_path)
+
+# 画像とラベルをそれぞれXとyに代入
+X = test_data['img']
+y = test_data['label']
+
+#one-hotエンコーディング
+y = to_categorical(y, num_classes=num_classes)
+
+# X:画像データ y:ラベルデータをセットでdataset化
+dataset_test = tf.data.Dataset.from_tensor_slices((X, y))
+
+# シャッフル
+dataset_test = dataset_test.shuffle(buffer_size=len(X))
+
+print(X.shape, y.shape)
