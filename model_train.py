@@ -23,6 +23,8 @@ train_data_path = 'train_img.npz' #訓練データのパス
 test_data_path = 'test_img.npz'   #テストデータのパス
 num_test = 750 #テストデータの枚数
 
+tf.config.experimental_run_functions_eagerly(True)  # GPUのプロファイリングを無効化
+
 #---------------------------------------------------------
 #データセットの取得
 # npzファイルを読み込む(train)
@@ -106,7 +108,7 @@ model.fit(dataset_train, epochs=1, validation_data=val_dataset)
 
 #結果の表示
 accuracy = model.evaluate(dataset_test, verbose=0)
-print(accuracy)
+print('テスト結果',accuracy)
 
 #ファインチューニング
 #最初のfreeze_layar層は学習せず、freeze_layer層以降は学習させる
