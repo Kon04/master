@@ -51,8 +51,11 @@ dataset_train = dataset_train.shuffle(buffer_size=len(X))
 dataset_train = dataset_train.batch(batch_size, drop_remainder=True)
 
 # 訓練セットとバリデーションセットに分割
-# dataset_train = dataset_train.skip(validation_size)
-# val_dataset = dataset_train.take(validation_size)
+dataset_train = dataset_train.skip(validation_size)
+val_dataset = dataset_train.take(validation_size)
+
+# 訓練データセットを繰り返し可能にする
+train_dataset = dataset_train.repeat()
 
 # npzファイルを読み込む(test)
 test_data = np.load(test_data_path)
@@ -97,7 +100,7 @@ if model_display_flag == 1:
     model.summary()
 
 #学習(全結合層のみ)
-model.fit(dataset_train, epochs=10, validation_split=validation_split)
+model.fit(dataset_train, epochs=10, validation_data=val_dataset)
 
 #結果の表示
 accuracy = model.evaluate(dataset_test, verbose=0)
@@ -130,7 +133,7 @@ logging = callbacks.make_tensorboard(set_dir_name)
 #学習
 model.fit(dataset_train, 
           epochs=epochs, 
-          validation_split=validation_split,
+          validation_data=val_dataset,
           callbacks = [early_stopping, reduce_lr, logging],
           verbose=1
           )
