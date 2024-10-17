@@ -5,10 +5,13 @@ import glob
 import cv2
 import matplotlib.pyplot as plt
 
+from tensorflow.keras.utils import to_categorical
+
 train_data_path = 'train_img.npz' #訓練データのパス
 test_data_path = 'test_img.npz'   #テストデータのパス
 batch_size = 32
 validation_split = 0.2
+num_classes = 5
 
 #データセットの取得
 # npzファイルを読み込む(train)
@@ -17,6 +20,9 @@ train_data = np.load(train_data_path)
 # 画像とラベルをそれぞれXとyに代入
 X = train_data['img']
 y = train_data['label']
+
+#one-hotエンコーディング
+y = to_categorical(y, num_classes=num_classes)
 
 # X:画像データ y:ラベルデータをセットでdataset化
 dataset_train = tf.data.Dataset.from_tensor_slices((X, y))
@@ -39,5 +45,5 @@ train_dataset = dataset_train.skip(validation_size)
 val_dataset = dataset_train.take(validation_size)
 
 
-print(dataset_train.shape)
+print(X.shape, y.shape)
 # print(val_dataset.shape)
