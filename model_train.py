@@ -6,6 +6,7 @@ from tensorflow.keras.applications import InceptionV3
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Dense, GlobalAveragePooling2D
 from tensorflow.keras.optimizers import Adam, RMSprop
+from tensorflow.keras.utils import to_categorical
 
 base_model_name =InceptionV3 #転移学習元のネットワークを指定
 num_classes = 5 #クラス数
@@ -29,6 +30,9 @@ train_data = np.load(train_data_path)
 # 画像とラベルをそれぞれXとyに代入
 X = train_data['img']
 y = train_data['label']
+
+#one-hotエンコーディング
+y = to_categorical(y, num_classes=num_classes)
 
 # X:画像データ y:ラベルデータをセットでdataset化
 dataset_train = tf.data.Dataset.from_tensor_slices((X, y))
@@ -56,6 +60,9 @@ test_data = np.load(test_data_path)
 # 画像とラベルをそれぞれXとyに代入
 X = test_data['img']
 y = test_data['label']
+
+#one-hotエンコーディング
+y = to_categorical(y, num_classes=num_classes)
 
 # X:画像データ y:ラベルデータをセットでdataset化
 dataset_test = tf.data.Dataset.from_tensor_slices((X, y))
