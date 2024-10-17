@@ -22,6 +22,7 @@ set_dir_name = 'inceptionv3' #テンソルボードのログ保存用ディレ�
 train_data_path = 'train_img.npz' #訓練データのパス
 test_data_path = 'test_img.npz'   #テストデータのパス
 num_test = 750 #テストデータの枚数
+full_con_ep = 10 #全結合層学習のエポック数
 
 # tf.config.experimental_run_functions_eagerly(True)  # GPUのプロファイリングを無効化
 
@@ -104,7 +105,7 @@ if model_display_flag == 1:
     model.summary()
 
 #学習(全結合層のみ)
-model.fit(dataset_train, epochs=1, validation_data=val_dataset)
+model.fit(dataset_train, epochs=full_con_ep, validation_data=val_dataset)
 
 #結果の表示
 accuracy = model.evaluate(dataset_test, verbose=0)
