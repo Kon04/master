@@ -46,16 +46,14 @@ validation_size = int(validation_split * dataset_size)
 # シャッフル
 dataset_train = dataset_train.shuffle(buffer_size=len(X))
 
-# ミニバッチ化
-#（drop_remainder = Trueで端数切り捨て）
-dataset_train = dataset_train.batch(batch_size, drop_remainder=True)
-
 # 訓練セットとバリデーションセットに分割
 dataset_train = dataset_train.skip(validation_size)
 val_dataset = dataset_train.take(validation_size)
 
-# 訓練データセットを繰り返し可能にする
-train_dataset = dataset_train.repeat()
+# ミニバッチ化
+#（drop_remainder = Trueで端数切り捨て）
+dataset_train = dataset_train.batch(batch_size, drop_remainder=True)
+val_dataset = val_dataset.batch(batch_size, drop_remainder=True)
 
 # npzファイルを読み込む(test)
 test_data = np.load(test_data_path)
