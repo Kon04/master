@@ -21,6 +21,7 @@ epochs = 20 #エポック数
 set_dir_name = 'inceptionv3' #テンソルボードのログ保存用ディレクトリの名前
 train_data_path = 'train_img.npz' #訓練データのパス
 test_data_path = 'test_img.npz'   #テストデータのパス
+num_test = 750 #テストデータの枚数
 
 #---------------------------------------------------------
 #データセットの取得
@@ -70,6 +71,9 @@ dataset_test = tf.data.Dataset.from_tensor_slices((X, y))
 
 # シャッフル
 dataset_test = dataset_test.shuffle(buffer_size=len(X))
+
+#次元追加（３次元→４次元）
+dataset_test = dataset_test.batch(num_test, drop_remainder=True)
 
 #転移学習元のネットワークをダウンロード
 #"include_top=False"の場合全結合層を除いたネットーワークを取得
