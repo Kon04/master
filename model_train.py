@@ -12,7 +12,7 @@ num_classes = 5 #クラス数
 optimizer =  Adam() #最適化手法
 loss = 'categorical_crossentropy' #損失関数
 metrics = 'accuracy' #評価関数
-model_display_flag = 1 #モデルの層構造を表示するフラグ(1の時表示)
+model_display_flag = 0 #モデルの層構造を表示するフラグ(1の時表示)
 validation_split = 0.2 #検証データの割合
 batch_size = 32 #ミニバッチサイズ 
 freeze_layer = 249 #ファインチューニングで凍結させる層の数(ここで指定したn-1層までが凍結される)
@@ -90,7 +90,7 @@ if model_display_flag == 1:
     model.summary()
 
 #学習(全結合層のみ)
-model.fit(dataset_train, epochs=10, validation_data=val_dataset)
+model.fit(train_dataset, epochs=10, validation_data=val_dataset)
 
 #結果の表示
 accuracy = model.evaluate(dataset_test, verbose=0)
@@ -121,7 +121,7 @@ reduce_lr = callbacks.reduce_learnrate()
 logging = callbacks.make_tensorboard(set_dir_name)
 
 #学習
-model.fit(dataset_train, 
+model.fit(train_dataset, 
           epochs=epochs, 
           validation_data=val_dataset,
           callbacks = [early_stopping, reduce_lr, logging],
