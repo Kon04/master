@@ -110,7 +110,7 @@ model.fit(dataset_train, epochs=full_con_ep, validation_data=val_dataset)
 
 #結果の表示
 accuracy = model.evaluate(dataset_test, verbose=0)
-print('テスト結果',accuracy)
+print('テスト結果(全結合層)',accuracy)
 
 #ファインチューニング
 #最初のfreeze_layar層は学習せず、freeze_layer層以降は学習させる
