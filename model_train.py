@@ -23,6 +23,7 @@ train_data_path = 'train_img.npz' #訓練データのパス
 test_data_path = 'test_img.npz'   #テストデータのパス
 num_test = 750 #テストデータの枚数
 full_con_ep = 10 #全結合層学習のエポック数
+model_save_path = './model/incptionv3_weights.h5'
 
 # tf.config.experimental_run_functions_eagerly(True)  # GPUのプロファイリングを無効化
 
@@ -143,6 +144,10 @@ model.fit(dataset_train,
           verbose=1
           )
 
+#モデルと重みの保存
+model.save(model_save_path) 
+
 #結果の表示
 accuracy = model.evaluate(dataset_test, verbose=0)
-print(accuracy)
+print('test loss', accuracy[0])
+print('test accuracy', accuracy[1])
