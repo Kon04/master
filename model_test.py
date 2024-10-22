@@ -23,13 +23,13 @@ X_test = test_data['img']
 y_test = test_data['label']
 
 #one-hotエンコーディング
-y = to_categorical(y_test, num_classes=num_classes)
+y_test = to_categorical(y_test, num_classes=num_classes)
 
 print(X_test.shape)
 print(y_test.shape)
 
 # X:画像データ y:ラベルデータをセットでdataset化
-dataset_test = tf.data.Dataset.from_tensor_slices((X_test, y))
+dataset_test = tf.data.Dataset.from_tensor_slices((X_test, y_test))
 
 # シャッフル
 dataset_test = dataset_test.shuffle(buffer_size=len(X_test))
