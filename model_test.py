@@ -19,19 +19,20 @@ num_test = 750 #テストデータの枚数
 test_data = np.load(test_data_path)
 
 # 画像とラベルをそれぞれXとyに代入
-X = test_data['img']
-y = test_data['label']
-
-print(X.shape)
+X_test = test_data['img']
+y_test = test_data['label']
 
 #one-hotエンコーディング
 y = to_categorical(y, num_classes=num_classes)
 
+print(X_test.shape)
+print(y_test.shape)
+
 # X:画像データ y:ラベルデータをセットでdataset化
-dataset_test = tf.data.Dataset.from_tensor_slices((X, y))
+dataset_test = tf.data.Dataset.from_tensor_slices((X_test, y))
 
 # シャッフル
-dataset_test = dataset_test.shuffle(buffer_size=len(X))
+dataset_test = dataset_test.shuffle(buffer_size=len(X_test))
 
 #次元追加（３次元→４次元）
 dataset_test = dataset_test.batch(num_test, drop_remainder=True)
@@ -40,6 +41,6 @@ dataset_test = dataset_test.batch(num_test, drop_remainder=True)
 model = load_model(model_path)
  
 #結果の表示
-accuracy = model.evaluate(dataset_test, verbose=0)
+accuracy = model.evaluate(X_test, y_test, verbose=0)
 print('test loss', accuracy[0])
 print('test accuracy', accuracy[1])
