@@ -5,7 +5,6 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib
-matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 from tensorflow.keras.applications import InceptionV3
@@ -59,7 +58,7 @@ sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
 plt.title('Confusion Matrix')
 plt.xlabel('Predicted Label')
 plt.ylabel('True Label')
-plt.show()
+plt.savefig('incv3_confusion_matrix')
 
 # # 各クラスの精度の計算
 # class_accuracy = cm.diagonal() / cm.sum(axis=1)
