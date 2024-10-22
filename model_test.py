@@ -28,22 +28,22 @@ X_test = test_data['img']
 y_test = test_data['label']
 
 #one-hotエンコーディング
-# y_test = to_categorical(y_test, num_classes=num_classes)
+y = to_categorical(y_test, num_classes=num_classes)
 
 #モデルと重みを復元
 model = load_model(model_path)
  
 #結果の表示
-# accuracy = model.evaluate(X_test, y_test, verbose=0)
-# print('test loss', accuracy[0])
-# print('test accuracy', accuracy[1])
+accuracy = model.evaluate(X_test, y, verbose=0)
+print('test loss', accuracy[0])
+print('test accuracy', accuracy[1])
 
 # テストデータでの予測
 y_pred = model.predict(X_test)
 y_pred_classes = np.argmax(y_pred, axis=1) #配列の最大値のインデックスを取得
 
-print("y_test:", y_test[:750])  # 最初の10個を表示
-print("y_pred_classes:", y_pred_classes[:750])  # 最初の10個を表示
+# print("y_test:", y_test[:750])  # 最初の10個を表示
+# print("y_pred_classes:", y_pred_classes[:750])  # 最初の10個を表示
 
 # 混同行列の計算
 cm = confusion_matrix(y_test, y_pred_classes)
