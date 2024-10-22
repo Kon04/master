@@ -2,6 +2,8 @@
 
 import tensorflow as tf
 import numpy as np
+import pandas as pd
+from sklearn.metrics import confusion_matrix
 from tensorflow.keras.applications import InceptionV3
 from tensorflow.keras.models import load_model
 from tensorflow.keras.layers import Dense, GlobalAveragePooling2D
@@ -25,22 +27,28 @@ y_test = test_data['label']
 #one-hotエンコーディング
 y_test = to_categorical(y_test, num_classes=num_classes)
 
-print(X_test.shape)
-print(y_test.shape)
-
-# X:画像データ y:ラベルデータをセットでdataset化
-dataset_test = tf.data.Dataset.from_tensor_slices((X_test, y_test))
-
-# シャッフル
-dataset_test = dataset_test.shuffle(buffer_size=len(X_test))
-
-#次元追加（３次元→４次元）
-dataset_test = dataset_test.batch(num_test, drop_remainder=True)
-
 #モデルと重みを復元
 model = load_model(model_path)
  
 #結果の表示
-accuracy = model.evaluate(X_test, y_test, verbose=0)
-print('test loss', accuracy[0])
-print('test accuracy', accuracy[1])
+# accuracy = model.evaluate(X_test, y_test, verbose=0)
+# print('test loss', accuracy[0])
+# print('test accuracy', accuracy[1])
+
+# テストデータでの予測
+y_pred = model.predict(X_test)
+y_pred_classes = np.argmax(y_pred, axis=1) #配列の最大値のインデックスを取得
+
+# 混同行列の計算
+cm = confusion_matrix(y_test, y_pred_classes)
+
+# 各クラスの精度の計算
+class_accuracy = cm.diagonal() / cm.sum(axis=1)
+
+# pandas DataFrameに変換して表形式で表示
+accuracy_df = pd.DataFrame({
+    'クラス': np.arange(len(class_accuracy)),
+    '精度': class_accuracy
+})
+
+print(accuracy_df)
