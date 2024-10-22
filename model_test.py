@@ -25,7 +25,7 @@ X_test = test_data['img']
 y_test = test_data['label']
 
 #one-hotエンコーディング
-y_test = to_categorical(y_test, num_classes=num_classes)
+#y_test = to_categorical(y_test, num_classes=num_classes)
 
 #モデルと重みを復元
 model = load_model(model_path)
