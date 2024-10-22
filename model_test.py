@@ -41,8 +41,12 @@ model = load_model(model_path)
 y_pred = model.predict(X_test)
 y_pred_classes = np.argmax(y_pred, axis=1) #配列の最大値のインデックスを取得
 
+print("y_test:", y_test[:10])  # 最初の10個を表示
+print("y_pred_classes:", y_pred_classes[:10])  # 最初の10個を表示
+
 # 混同行列の計算
 cm = confusion_matrix(y_test, y_pred_classes)
+print("Confusion Matrix:\n", cm)
 
 # ヒートマップの作成
 plt.figure(figsize=(8, 6))  # 図のサイズを指定
