@@ -4,6 +4,8 @@ import tensorflow as tf
 import numpy as np
 import pandas as pd
 import seaborn as sns
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 from tensorflow.keras.applications import InceptionV3
