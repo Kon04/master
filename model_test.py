@@ -23,7 +23,7 @@ X_test = test_data['img']
 y_test = test_data['label']
 
 #one-hotエンコーディング
-y = to_categorical(y, num_classes=num_classes)
+y = to_categorical(y_test, num_classes=num_classes)
 
 print(X_test.shape)
 print(y_test.shape)
