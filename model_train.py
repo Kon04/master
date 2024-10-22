@@ -8,6 +8,7 @@ from tensorflow.keras.layers import Dense, GlobalAveragePooling2D
 from tensorflow.keras.optimizers import Adam, RMSprop
 from tensorflow.keras.utils import to_categorical
 
+#諸変数の定義
 base_model_name =InceptionV3 #転移学習元のネットワークを指定
 num_classes = 5 #クラス数
 optimizer =  Adam() #最適化手法
@@ -24,8 +25,6 @@ test_data_path = 'test_img.npz'   #テストデータのパス
 num_test = 750 #テストデータの枚数
 full_con_ep = 10 #全結合層学習のエポック数
 model_save_path = './model/incptionv3_weights.h5'
-
-# tf.config.experimental_run_functions_eagerly(True)  # GPUのプロファイリングを無効化
 
 #---------------------------------------------------------
 #データセットの取得
