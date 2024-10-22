@@ -26,13 +26,16 @@ test_data = np.load(test_data_path)
 X_test = test_data['img']
 y_test = test_data['label']
 
+#one-hotエンコーディング
+# y_test = to_categorical(y_test, num_classes=num_classes)
+
 #モデルと重みを復元
 model = load_model(model_path)
  
 #結果の表示
-accuracy = model.evaluate(X_test, y_test, verbose=0)
-print('test loss', accuracy[0])
-print('test accuracy', accuracy[1])
+# accuracy = model.evaluate(X_test, y_test, verbose=0)
+# print('test loss', accuracy[0])
+# print('test accuracy', accuracy[1])
 
 # テストデータでの予測
 y_pred = model.predict(X_test)
