@@ -11,9 +11,9 @@ from tensorflow.keras.utils import to_categorical
 #諸変数の定義
 num_classes = 5 #クラス数
 model_path = './model/incptionv3_weights.h5' #評価するモデルのパス
-test_data_path = 'test_unknown_img.npz'   #テストデータのパス
-save_name = 'incv3_confusion_matrix_unknown' #混合行列保存用のファイル名
-num_test = 1250 #テストデータの枚数
+test_data_path = 'test_img.npz'   #テストデータのパス
+save_name = 'incv3_confusion_matrix' #混合行列保存用のファイル名
+num_test = 750 #テストデータの枚数
 #-------------------------------------------------------------
 
 # npzファイルを読み込む(test)
