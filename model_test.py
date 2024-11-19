@@ -11,9 +11,9 @@ from tensorflow.keras.utils import to_categorical
 #諸変数の定義
 num_classes = 5 #クラス数
 model_path = './model/incptionv3_weights.h5' #評価するモデルのパス
-test_data_path = 'test_img.npz'   #テストデータのパス
-save_name = 'incv3_confusion_matrix' #混合行列保存用のファイル名
-num_test = 750 #テストデータの枚数
+test_data_path = 'test_unknown_img_nomark.npz'   #テストデータのパス
+save_name = 'incv3_confusion_matrix_unknown_nomark' #混合行列保存用のファイル名
+num_test = 1250 #テストデータの枚数
 #-------------------------------------------------------------
 
 # npzファイルを読み込む(test)
@@ -38,8 +38,8 @@ print('test accuracy', accuracy[1])
 y_pred = model.predict(X_test)
 y_pred_classes = np.argmax(y_pred, axis=1) #配列の最大値のインデックスを取得
 
-print("y_test:", y_test[:1250])  # 最初の10個を表示
-print("y_pred_classes:", y_pred_classes[:1250])  # 最初の10個を表示
+# print("y_test:", y_test[:1250])  # 最初の10個を表示
+# print("y_pred_classes:", y_pred_classes[:1250])  # 最初の10個を表示
 
 # 混同行列の計算
 cm = confusion_matrix(y_test, y_pred_classes)
