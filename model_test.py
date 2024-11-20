@@ -40,6 +40,7 @@ print('test accuracy', accuracy[1])
 y_pred = model.predict(X_test)
 y_pred_classes = np.argmax(y_pred, axis=1) #配列の最大値のインデックスを取得
 
+#混合行列を表示
 if(confusion_flag == 1):
     # 混同行列の計算
     cm = confusion_matrix(y_test, y_pred_classes)
@@ -56,16 +57,37 @@ if(confusion_flag == 1):
     plt.ylabel('True Label')
     plt.savefig(save_name)
 
+#予測を間違った画像を表示
 if(show_flag == 1):
     # 間違って分類されたインデックスを取得
     incorrect_indices = np.where(y_pred_classes != y_test)[0]
 
-# 間違って分類された画像を表示
-    for i in range(min(5, len(incorrect_indices))):  # 最大5枚表示
-        index = incorrect_indices[i]
-    
-    # 画像を表示
-        plt.imshow(X_test[index], cmap='gray')  # カラーマップはデータセットに応じて変更
-        plt.title(f"True: {y_test[index]}, Pred: {y_pred_classes[index]}")
+    # 一ページに表示する画像の数
+    images_per_page = 20
+    num_pages = len(incorrect_indices) // images_per_page + (1 if len(incorrect_indices) % images_per_page != 0 else 0)
 
-    
+    # ページごとに画像を表示
+    for page in range(num_pages):
+        plt.figure(figsize=(30, 18))  # 1ページのサイズを設定（適宜調整）
+
+        # 1ページに表示する画像のインデックス
+        start_index = page * images_per_page
+        end_index = min((page + 1) * images_per_page, len(incorrect_indices))
+
+        # サブプロットを設定
+        for i in range(start_index, end_index):
+            index = incorrect_indices[i]
+            plt.subplot(4, 5, i - start_index + 1)  # 4行×5列のサブプロットを設定
+
+            # 画像を表示
+            plt.imshow(X_test[index], cmap='gray')  # データがグレースケールの場合
+            plt.title(f"True: {y_test[index]}, Pred: {y_pred_classes[index]}")
+            plt.axis('off')  # 軸を非表示
+
+       # ページごとに画像を保存
+        page_filename = f"incorrect_nomark_images_page_{page + 1}.png"
+        plt.tight_layout()  # レイアウトを自動調整
+        plt.savefig(page_filename)  # 画像を保存
+        plt.close()  # 現在の図を閉じてメモリを解放
+
+        print(f"Page {page + 1} saved as {page_filename}")
