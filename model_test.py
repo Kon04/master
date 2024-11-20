@@ -14,6 +14,8 @@ model_path = './model/incptionv3_weights.h5' #評価するモデルのパス
 test_data_path = 'test_unknown_img_nomark.npz'   #テストデータのパス
 save_name = 'incv3_confusion_matrix_unknown_nomark' #混合行列保存用のファイル名
 num_test = 1250 #テストデータの枚数
+confusion_flag = 0 #混合行列を表示するかのフラグ（1の時表示）
+show_flag = 1 #分類を間違えた画像を表示するかのフラグ（1の時表示）
 #-------------------------------------------------------------
 
 # npzファイルを読み込む(test)
@@ -38,31 +40,32 @@ print('test accuracy', accuracy[1])
 y_pred = model.predict(X_test)
 y_pred_classes = np.argmax(y_pred, axis=1) #配列の最大値のインデックスを取得
 
-# print("y_test:", y_test[:1250])  # 最初の10個を表示
-# print("y_pred_classes:", y_pred_classes[:1250])  # 最初の10個を表示
+if(confusion_flag == 1):
+    # 混同行列の計算
+    cm = confusion_matrix(y_test, y_pred_classes)
+    print("Confusion Matrix:\n", cm)
 
-# 混同行列の計算
-cm = confusion_matrix(y_test, y_pred_classes)
-print("Confusion Matrix:\n", cm)
+    # ヒートマップの作成
+    plt.figure(figsize=(8, 6))  # 図のサイズを指定
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
+                xticklabels=np.arange(num_classes), 
+                yticklabels=np.arange(num_classes))
 
-# ヒートマップの作成
-plt.figure(figsize=(8, 6))  # 図のサイズを指定
-sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
-            xticklabels=np.arange(num_classes), 
-            yticklabels=np.arange(num_classes))
+    plt.title('Confusion Matrix')
+    plt.xlabel('Predicted Label')
+    plt.ylabel('True Label')
+    plt.savefig(save_name)
 
-plt.title('Confusion Matrix')
-plt.xlabel('Predicted Label')
-plt.ylabel('True Label')
-plt.savefig(save_name)
+if(show_flag == 1):
+    # 間違って分類されたインデックスを取得
+    incorrect_indices = np.where(y_pred_classes != y_test)[0]
 
-# # 各クラスの精度の計算
-# class_accuracy = cm.diagonal() / cm.sum(axis=1)
-
-# # pandas DataFrameに変換して表形式で表示
-# accuracy_df = pd.DataFrame({
-#     'クラス': np.arange(len(class_accuracy)),
-#     '精度': class_accuracy
-# })
-
-# print(accuracy_df)
+# 間違って分類された画像を表示
+    for i in range(min(5, len(incorrect_indices))):  # 最大5枚表示
+        index = incorrect_indices[i]
+    
+    # 画像を表示
+        plt.imshow(X_test[index], cmap='gray')  # カラーマップはデータセットに応じて変更
+        plt.title(f"True: {y_test[index]}, Pred: {y_pred_classes[index]}")
+        plt.show()
+    
