@@ -11,7 +11,7 @@ from tensorflow.keras.utils import to_categorical
 #諸変数の定義
 num_classes = 5 #クラス数
 model_path = './model/incptionv3_weights.h5' #評価するモデルのパス
-test_data_path = 'test_unknown_img_nomark.npz'   #テストデータのパス
+test_data_path = 'test_unknown_img.npz'   #テストデータのパス
 save_name = 'incv3_confusion_matrix_unknown_nomark' #混合行列保存用のファイル名
 num_test = 1250 #テストデータの枚数
 confusion_flag = 0 #混合行列を表示するかのフラグ（1の時表示）
@@ -85,7 +85,7 @@ if(show_flag == 1):
             plt.axis('off')  # 軸を非表示
 
        # ページごとに画像を保存
-        page_filename = f"incorrect_nomark_images_page_{page + 1}.png"
+        page_filename = f"incorrect__images_page_{page + 1}.png"
         plt.tight_layout()  # レイアウトを自動調整
         plt.savefig(page_filename)  # 画像を保存
         plt.close()  # 現在の図を閉じてメモリを解放
