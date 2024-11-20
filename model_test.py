@@ -67,5 +67,5 @@ if(show_flag == 1):
     # 画像を表示
         plt.imshow(X_test[index], cmap='gray')  # カラーマップはデータセットに応じて変更
         plt.title(f"True: {y_test[index]}, Pred: {y_pred_classes[index]}")
-        plt.show()
+
     
