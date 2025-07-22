@@ -10,10 +10,10 @@ cpf = 12              #何フレーム毎に切り出すか
 image_width = 299       #リサイズする画像の幅
 image_heigh = 299       #リサイズする画像の高さ
 laplacian_thr = 0     #ボケ画像判定をするときのスレッショルド
-video_path = 'C:/Kon/master_reserch/datasets/data_nomark/wine3/P1140129.MOV'         #読み込む動画ファイルのパスを指定
+video_path = 'C:/Kon/master_reserch/datasets/data_nomark/cup2/P1040017.MOV'         #読み込む動画ファイルのパスを指定
 save_path = 'C:/Kon/master_reserch/datasets/test_nomark/'  #保存先の親フォルダのパス
 save_dir = '250ml'   #保存先の子フォルダの名前
-save_name = 'wine3_250_nomark'   #保存する画像名
+save_name = 'cup2_250_nomark'   #保存する画像名
 extension = '.jpg'  #画像ファイルの拡張子
 save_file_num = 50 #保存する画像の数s
 

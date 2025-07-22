@@ -8,8 +8,8 @@ import random
 #エントリーポイント
 def main():
     #諸変数の定義
-    original_dir = "C:/Kon/master_reserch/train_dataset" #分割元のデータセットフォルダーのパス
-    base_dir = "C:/Kon/master_reserch/train_dataset2" #分割後のデータを格納するフォルダのパス
+    original_dir = "C:/Kon/master_reserch/datasets/main15_dataset" #分割元のデータセットフォルダーのパス
+    base_dir = "C:/Kon/master_reserch/datasets/2" #分割後のデータを格納するフォルダのパス
     train_size = 0.8 #訓練データの割合
     
     #データセット分割

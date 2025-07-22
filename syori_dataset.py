@@ -9,8 +9,8 @@ import matplotlib.pyplot as plt
 
 #諸変数の定義
 img_size = 299 #画像サイズ
-save_name = 'test_unknown_img.npz' #生成したファイルの保存名
-train_dir = 'C:\\Kon\\master_reserch\\tensorflow\\test_dataset' #処理を加えるファイルのパス
+save_name = 'real_simulation_train.npz' #生成したファイルの保存名
+train_dir = 'C:\\Kon\\master_reserch\\datasets\\real_simulation_train' #処理を加えるファイルのパス
 #test_dir = 'C:\\Kon\\master_reserch\\tensorflow\\train_dataset\\test'
 
 # カテゴリネームと番号を対応させた辞書を作成（ラベルは数値）
@@ -18,7 +18,7 @@ label_dict = {
     '50ml' : 0,
     '100ml' : 1,
     '150ml' : 2,
-    '200ml' : 3,  
+    '200ml' : 3,
     '250ml' : 4}
 
 # 画像とラベルを格納する空のリストを作る

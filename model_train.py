@@ -19,12 +19,12 @@ validation_split = 0.2 #検証データの割合
 batch_size = 32 #ミニバッチサイズ 
 freeze_layer = 249 #ファインチューニングで凍結させる層の数(ここで指定したn-1層までが凍結される)
 epochs = 20 #エポック数
-set_dir_name = 'inceptionv3' #テンソルボードのログ保存用ディレクトリの名前
-train_data_path = 'train_img.npz' #訓練データのパス
-test_data_path = 'test_img.npz'   #テストデータのパス
-num_test = 750 #テストデータの枚数
+set_dir_name = 'inceptionv3_real_simulation' #テンソルボードのログ保存用ディレクトリの名前
+train_data_path = 'real_simulation_train.npz' #訓練データのパス
+test_data_path = 'real_simulation_test.npz'   #テストデータのパス
+num_test = 1350 #テストデータの枚数
 full_con_ep = 10 #全結合層学習のエポック数
-model_save_path = './model/incptionv3_weights.h5'
+model_save_path = './model/incptionv3_weights_real_simulation.h5'
 
 #---------------------------------------------------------
 #データセットの取得
