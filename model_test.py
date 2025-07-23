@@ -10,11 +10,11 @@ from tensorflow.keras.utils import to_categorical
 
 #諸変数の定義
 num_classes = 5 #クラス数
-model_path = './model/incptionv3_weights.h5' #評価するモデルのパス
-test_data_path = 'test_unknown_img_nomark.npz'   #テストデータのパス
-save_name = 'incv3_confusion_matrix_unknown_nomark' #混合行列保存用のファイル名
+model_path = './model/incptionv3_weights_real_simulation.h5' #評価するモデルのパス
+test_data_path = 'test_unknown_img.npz'   #テストデータのパス
+save_name = 'incv3_real_simulation_confusion_matrix_unknown' #混合行列保存用のファイル名
 num_test = 1250 #テストデータの枚数
-confusion_flag = 0 #混合行列を表示するかのフラグ（1の時表示）
+confusion_flag = 1 #混合行列を表示するかのフラグ（1の時表示）
 show_flag = 1 #分類を間違えた画像を表示するかのフラグ（1の時表示）
 #-------------------------------------------------------------
 
