@@ -24,7 +24,7 @@ train_data_path = 'real_simulation450_train.npz' #訓練データのパス
 test_data_path = 'real_simulation450_test.npz'   #テストデータのパス
 num_test = 840 #テストデータの枚数
 full_con_ep = 15 #全結合層学習のエポック数
-model_save_path = './model/incptionv3_weights_real_simulation4200.h5'
+model_save_path = './model/incptionv3_weights_real_simulation450.h5'
 
 #---------------------------------------------------------
 #データセットの取得
