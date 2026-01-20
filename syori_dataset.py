@@ -9,8 +9,8 @@ import matplotlib.pyplot as plt
 
 #諸変数の定義
 img_size = 299 #画像サイズ
-save_name = 'real_simulation_train.npz' #生成したファイルの保存名
-train_dir = 'C:\\Kon\\master_reserch\\datasets\\real_simulation_train' #処理を加えるファイルのパス
+save_name = 'real_simulation450_train.npz' #生成したファイルの保存名
+train_dir = 'C:\\Kon\\master_reserch\\datasets\\real_simulation\\real_simulation450\\train' #処理を加えるファイルのパス
 #test_dir = 'C:\\Kon\\master_reserch\\tensorflow\\train_dataset\\test'
 
 # カテゴリネームと番号を対応させた辞書を作成（ラベルは数値）

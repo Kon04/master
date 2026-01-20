@@ -7,10 +7,10 @@ from PIL import Image
 #エントリーポイント
 def main():
     #諸変数の定義
-    original_dir = "/mnt/c/Kon/master_reserch/test/test" #リサイズ元の画像フォルダのパスを指定(区切りは'/')
-    save_dir = "/mnt/c/Kon/master_reserch/test" #リサイズした画像を保存するディレクトリを指定
-    save_name = "test_resized224" #保存用のフォルダー名
-    resize_size = 224 #リサイズ後の画像サイズ
+    original_dir = 'C:\\Kon\\master_reserch\\datasets\\simulation'  #リサイズ元の画像フォルダのパスを指定
+    save_dir = 'C:\\Kon\\master_reserch' #リサイズした画像を保存するディレクトリを指定
+    save_name = "simulation_resized299" #保存用のフォルダー名
+    resize_size = 299 #リサイズ後の画像サイズ
 
     #保存先の作成
     save_dir_plus = os.path.join(save_dir, save_name)
@@ -30,6 +30,7 @@ def main():
 
 #画像をリサイズする関数
 def resize_files(dir_lists, original_dir, save_dir, resize_size):
+    print('a')
     #画像ファイルのパスを取得
     original_dir_path = os.path.join(original_dir, dir_lists) #サブディレクトリまでのパスを生成
     files_path = os.path.join(original_dir_path, '*')
@@ -37,8 +38,9 @@ def resize_files(dir_lists, original_dir, save_dir, resize_size):
 
     #処理&保存
     for f in files:
+        print('b')
         root, ext = os.path.splitext(f) #ファイルパスを拡張子とそれ以外に分割(extに拡張子が格納される)
-        if ext in ['.JPG', '.PNG', '.JPEG']: #拡張子が画像ファイルのものか判別
+        if ext.upper() in ['.JPG', '.PNG', '.JPEG']: #拡張子が画像ファイルのものか判別
             
             #リサイズ処理
             img = Image.open(f)
@@ -49,6 +51,7 @@ def resize_files(dir_lists, original_dir, save_dir, resize_size):
             file_name = os.path.basename(root) #パスのファイル名部分だけを取得
             save_path = os.path.join(save_dir, file_name + ext)
             img_resize.save(save_path)
+            print('c')
             
 if __name__ == "__main__":
     main()
