@@ -22,7 +22,6 @@ epochs = 30 #エポック数
 set_dir_name = 'inceptionv3_simulation' #テンソルボードのログ保存用ディレクトリの名前
 train_data_path = 'real_simulation4200_train.npz' #訓練データのパス
 test_data_path = 'real_simulation4200_test.npz'   #テストデータのパス
-num_test = 1590 #テストデータの枚数
 full_con_ep = 15 #全結合層学習のエポック数
 model_save_path = './model/incptionv3_weights_real_simulation4200.h5'
 
