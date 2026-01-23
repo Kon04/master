@@ -9,7 +9,7 @@ from tensorflow.keras.optimizers import Adam, RMSprop
 from tensorflow.keras.utils import to_categorical
 
 #諸変数の定義
-base_model_name =InceptionV3 #転移学習元のネットワークを指定
+base_model_name =InceptionV3 #転移学習元のネットワークを指定z
 num_classes = 5 #クラス数
 optimizer =  Adam() #最適化手法
 loss = 'categorical_crossentropy' #損失関数
