@@ -16,7 +16,7 @@ loss = 'categorical_crossentropy' #損失関数
 metrics = 'accuracy' #評価関数
 model_display_flag = 0 #モデルの層構造を表示するフラグ(1の時表示)
 validation_split = 0.2 #検証データの割合
-batch_size = 32 #ミニバッチサイズ 
+batch_size = 32 #ミニバッチサイズ
 freeze_layer = 249 #ファインチューニングで凍結させる層の数(ここで指定したn-1層までが凍結される)
 epochs = 30 #エポック数
 set_dir_name = 'inceptionv3_simulation' #テンソルボードのログ保存用ディレクトリの名前
@@ -76,7 +76,7 @@ dataset_test = tf.data.Dataset.from_tensor_slices((X, y))
 dataset_test = dataset_test.shuffle(buffer_size=len(X))
 
 #次元追加（３次元→４次元）
-dataset_test = dataset_test.batch(num_test, drop_remainder=True)
+dataset_test = dataset_test.batch(batch_size, drop_remainder=True)
 
 #転移学習元のネットワークをダウンロード
 #"include_top=False"の場合全結合層を除いたネットーワークを取得
