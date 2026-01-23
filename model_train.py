@@ -20,8 +20,8 @@ batch_size = 32 #ミニバッチサイズ
 freeze_layer = 249 #ファインチューニングで凍結させる層の数(ここで指定したn-1層までが凍結される)
 epochs = 30 #エポック数
 set_dir_name = 'inceptionv3_simulation' #テンソルボードのログ保存用ディレクトリの名前
-train_data_path = 'real_simulation_train1800.npz' #訓練データのパス
-test_data_path = 'real_simulation_test1800.npz'   #テストデータのパス
+train_data_path = 'real_simulation1800_train.npz' #訓練データのパス
+test_data_path = 'real_simulation1800_test.npz'   #テストデータのパス
 full_con_ep = 15 #全結合層学習のエポック数
 model_save_path = './model/incptionv3_weights_real_simulation1800.h5'
 
